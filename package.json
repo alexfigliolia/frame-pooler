@@ -1,6 +1,6 @@
 {
   "name": "@figliolia/frame-pooler",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A task manager for distributing callbacks between animation frames",
   "main": "dist/cjs/index.js",
   "scripts": {
@@ -21,6 +21,11 @@
   ],
   "author": "Alex Figliolia",
   "license": "MIT",
+  "homepage": "https://github.com/alexfigliolia/data-structures#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexfigliolia/data-structures.git"
+  },
   "devDependencies": {
     "@figliolia/child-process": "^1.0.1",
     "@types/node": "^20.11.19",
