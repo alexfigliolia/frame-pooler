@@ -1,5 +1,4 @@
-import { PointerQueue } from "./PointerQueue";
-import { Queue } from "./Queue";
+import { LinkedList } from "@figliolia/data-structures";
 import type { Task } from "./types";
 
 /**
@@ -20,15 +19,11 @@ import type { Task } from "./types";
  */
 export class FramePooler {
   public maxStackSize: number;
-  public readonly queue: Queue<Task>;
+  public readonly queue: LinkedList<Task>;
   private currentFrame: number | null = null;
   constructor(maxStackSize = Infinity) {
     this.maxStackSize = maxStackSize;
-    if (maxStackSize === Infinity) {
-      this.queue = new Queue<Task>();
-    } else {
-      this.queue = new PointerQueue<Task>();
-    }
+    this.queue = new LinkedList<Task>();
   }
 
   /**
@@ -50,11 +45,11 @@ export class FramePooler {
     this.currentFrame = requestAnimationFrame(time => {
       const now = performance.now();
       for (let i = 0; i < this.maxStackSize && this.queue.size; i++) {
+        void this.queue.shift()?.(time);
         const then = performance.now();
         if (then - now >= 16) {
           break;
         }
-        void this.queue.shift()?.(time);
       }
       this.onPool();
     });
@@ -62,9 +57,8 @@ export class FramePooler {
 
   private onPool() {
     this.currentFrame = null;
-    if (!this.queue.size) {
-      return this.queue.clear();
+    if (this.queue.size) {
+      this.execute();
     }
-    this.execute();
   }
 }

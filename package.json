@@ -1,6 +1,6 @@
 {
   "name": "@figliolia/frame-pooler",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A task manager for distributing callbacks between animation frames",
   "main": "dist/cjs/index.js",
   "scripts": {
@@ -58,5 +58,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "peerDependencies": {
+    "@figliolia/data-structures": "^1.0.6"
+  }
 }
